@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>١١ · ١١</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cairo:wght@400;700&family=Dancing+Script:wght@600&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#1b0f1e; --bg2:#33162f; --rose:#ec6b8d; --blush:#ffdbe3; --gold:#ecc67f; --paper:#fff6ef; --ink:#7a1f3d;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%}
+body{
+  margin:0; min-height:100%;
+  background:radial-gradient(ellipse at 50% 0%, var(--bg2), var(--bg) 70%) var(--bg);
+  color:var(--blush);
+  font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  display:flex; flex-direction:column; align-items:center;
+  padding:28px 20px 56px;
+}
+h1{
+  margin:0 0 26px; font-family:'Aref Ruqaa','Cairo',serif; font-weight:700;
+  font-size:clamp(46px,14vw,72px); line-height:1.1; color:var(--gold); letter-spacing:.04em;
+  display:flex; align-items:center; gap:14px;
+}
+h1 .h{font-size:.4em; color:var(--rose)}
+
+/* photos */
+.photos{display:flex; justify-content:center; flex-wrap:nowrap}
+.photo{
+  position:relative; width:min(40vw,168px); aspect-ratio:1; border-radius:50%;
+  padding:4px; background:conic-gradient(var(--gold),var(--rose),var(--gold));
+  display:block;
+}
+.photo .in{
+  width:100%; height:100%; border-radius:50%; overflow:hidden; background:#2a1628;
+  display:flex; align-items:center; justify-content:center;
+}
+.photo img{width:100%; height:100%; object-fit:cover; display:block}
+.photo + .photo{margin-inline-start:-26px; z-index:2; box-shadow:0 0 0 4px var(--bg)}
+
+/* player */
+.player{
+  margin-top:34px; width:min(100%,380px); direction:ltr;
+  display:flex; align-items:center; gap:12px;
+  background:rgba(255,219,227,.08); border:1px solid rgba(236,198,127,.35);
+  border-radius:999px; padding:10px 16px 10px 10px;
+}
+.play{
+  flex:none; width:30px; height:30px; border-radius:50%; border:0; cursor:pointer;
+  background:var(--rose); display:grid; place-items:center;
+}
+.play svg{width:12px; height:12px; fill:#1b0f1e}
+.play:focus-visible,.env:focus-visible{outline:3px solid var(--blush); outline-offset:3px}
+.disc{
+  position:relative; flex:none; width:56px; height:56px; border-radius:50%; padding:2px;
+  background:conic-gradient(var(--gold),var(--rose),var(--gold));
+  animation:spin 6s linear infinite; animation-play-state:paused;
+}
+.disc.on{animation-play-state:running}
+.disc img{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block}
+.disc::after{content:""; position:absolute; inset:0; margin:auto; width:10px; height:10px; border-radius:50%; background:var(--bg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mid{flex:1; min-width:0}
+.song{
+  font-family:'Dancing Script','Segoe Script','Bradley Hand','Brush Script MT',cursive; font-weight:600;
+  font-size:25px; line-height:1.15; color:var(--gold); direction:ltr; text-align:left;
+}
+.ctrl{display:flex; align-items:center; gap:10px; margin-top:6px}
+.ctrl input[type=range]{flex:1; min-width:0}
+.time{flex:none; font-size:12px; color:var(--blush); opacity:.8; font-variant-numeric:tabular-nums}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:5px; border-radius:5px; margin:0;
+  background:linear-gradient(to right,var(--rose) var(--p,0%),rgba(255,219,227,.25) var(--p,0%)); cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--gold); border:0}
+input[type=range]::-moz-range-thumb{width:14px; height:14px; border-radius:50%; background:var(--gold); border:0}
+
+/* envelope */
+.stage{margin-top:44px; padding-top:110px}
+.env{
+  position:relative; display:block; width:280px; height:190px; padding:0; border:0; background:none;
+  cursor:pointer; perspective:900px; -webkit-tap-highlight-color:transparent;
+}
+.env>*{position:absolute}
+.back{inset:0; background:#b8456a; border-radius:6px}
+.letter{
+  left:14px; right:14px; top:10px; height:150px; background:var(--paper); border-radius:5px; z-index:2;
+  transition:transform .9s cubic-bezier(.2,.8,.2,1) .45s; color:var(--ink);
+  display:flex; justify-content:center; padding-top:20px;
+  box-shadow:0 2px 10px rgba(0,0,0,.25);
+}
+.letter span{
+  font-family:'Aref Ruqaa','Cairo',serif; font-weight:700; font-size:54px; line-height:1.2; height:70px;
+  display:flex; align-items:center; gap:10px;
+}
+.letter .h{font-size:24px; color:var(--rose)}
+.front{inset:0; z-index:3; background:#d4567d; border-radius:6px; clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%)}
+.flap{
+  left:0; right:0; top:0; height:106px; z-index:4; background:#e2698e;
+  clip-path:polygon(0 0,100% 0,50% 100%); transform-origin:top center;
+  transition:transform .5s ease, z-index 0s .25s;
+}
+.seal{
+  left:50%; top:78px; width:40px; height:40px; margin-left:-20px; z-index:5; display:grid; place-items:center;
+  background:var(--gold); border-radius:50%; transition:opacity .25s;
+  box-shadow:0 2px 6px rgba(0,0,0,.3);
+}
+.seal svg{width:20px; height:20px; fill:var(--ink)}
+.env.open .flap{transform:rotateX(180deg); z-index:1}
+.env.open .seal{opacity:0}
+.env.open .letter{transform:translateY(-100px)}
+.hint{margin-top:22px; font-size:14px; color:var(--gold); text-align:center; transition:opacity .3s}
+.hint.gone{opacity:0}
+
+/* lock screen */
+.lock{
+  position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:24px;
+  background:radial-gradient(ellipse at 50% 0%, var(--bg2), var(--bg) 70%) var(--bg);
+  transition:opacity .6s;
+}
+.lock.out{opacity:0; pointer-events:none}
+.lock form{width:min(100%,320px); display:grid; gap:14px; text-align:center}
+.lk{font-size:44px; color:var(--rose); line-height:1}
+.lock label{font-size:18px; color:var(--gold)}
+.lock input{
+  font:inherit; font-size:18px; text-align:center; color:var(--blush); width:100%;
+  background:rgba(255,219,227,.08); border:1px solid rgba(236,198,127,.5); border-radius:999px; padding:12px 16px;
+}
+.lock input:focus{outline:3px solid var(--blush); outline-offset:2px}
+.lock button{
+  font:inherit; font-weight:700; font-size:17px; color:#1b0f1e; background:var(--rose);
+  border:0; border-radius:999px; padding:12px; cursor:pointer;
+}
+.err{margin:0; min-height:3em; font-size:14px; line-height:1.6; color:#ff9aa8; white-space:pre-line}
+.ask{
+  display:block; font:inherit; font-weight:700; font-size:17px; color:var(--gold); text-decoration:none;
+  border:1px solid var(--gold); border-radius:999px; padding:12px;
+}
+.ask[hidden]{display:none}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+@media (prefers-reduced-motion:reduce){
+  .letter,.flap,.seal{transition-duration:.01s; transition-delay:0s}
+  .disc{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="lock" id="lock">
+  <form id="lf" autocomplete="off">
+    <div class="lk">♥</div>
+    <label for="pw">اكتب كلمة السر</label>
+    <input id="pw" type="text" autocomplete="off" autocapitalize="none" spellcheck="false">
+    <button type="submit">ادخل</button>
+    <p class="err" id="err" aria-live="polite"></p>
+    <a class="ask" id="ask" href="#" target="_blank" rel="noopener" hidden>نسأل احمد</a>
+  </form>
+</div>
+
+<h1>١١<span class="h">♥</span>١١</h1>
+
+<div class="photos">
+  <div class="photo"><span class="in"><img src="1.jpg" alt=""></span></div>
+  <div class="photo"><span class="in"><img src="2.jpg" alt=""></span></div>
+</div>
+
+<div class="player" role="group" aria-label="مشغل الأغنية">
+  <div class="disc" id="disc"><img src="M.jpg" alt=""></div>
+  <div class="mid">
+    <div class="song">I will always love you</div>
+    <div class="ctrl">
+      <button class="play" id="play" aria-label="تشغيل">
+        <svg id="ic" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg>
+      </button>
+      <input type="range" id="bar" min="0" max="100" step="0.1" value="0" aria-label="موضع التشغيل">
+      <span class="time" id="time">0:00</span>
+    </div>
+  </div>
+</div>
+<audio id="au" src="H.mp3" preload="metadata"></audio>
+
+<div class="stage">
+  <button class="env" id="env" aria-label="افتح الظرف" aria-expanded="false">
+    <div class="back"></div>
+    <div class="letter"><span>بحبك يا استاذه <i class="h">♥</i></span></div>
+    <div class="front"></div>
+    <div class="flap"></div>
+    <div class="seal"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 4.8 6.5 4.8c2 0 3.6 1.1 5.5 3.2 1.9-2.1 3.5-3.2 5.5-3.2 3.5 0 5.6 3.5 4.1 7C19.5 16.4 12 21 12 21z"/></svg></div>
+  </button>
+</div>
+<p class="hint" id="hint">اضغط على الظرف</p>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+
+  // player
+  var au=$('au'), play=$('play'), ic=$('ic'), bar=$('bar'), time=$('time'), disc=$('disc');
+  var P='M7 4.5v15l13-7.5z', S='M6 4h4v16H6zM14 4h4v16h-4z';
+  function fmt(t){ if(!isFinite(t)) return '0:00'; var m=Math.floor(t/60), s=Math.floor(t%60); return m+':'+(s<10?'0':'')+s; }
+  function setIcon(playing){
+    ic.firstElementChild.setAttribute('d',playing?S:P);
+    play.setAttribute('aria-label',playing?'إيقاف مؤقت':'تشغيل');
+    disc.classList.toggle('on',playing);
+  }
+  play.addEventListener('click',function(){
+    if(au.paused){ au.play().catch(function(){}); } else { au.pause(); }
+  });
+  au.addEventListener('play',function(){setIcon(true)});
+  au.addEventListener('pause',function(){setIcon(false)});
+  au.addEventListener('ended',function(){setIcon(false)});
+  au.addEventListener('timeupdate',function(){
+    var p=au.duration?au.currentTime/au.duration*100:0;
+    bar.value=p; bar.style.setProperty('--p',p+'%');
+    time.textContent=fmt(au.currentTime)+' / '+fmt(au.duration);
+  });
+  au.addEventListener('loadedmetadata',function(){ time.textContent='0:00 / '+fmt(au.duration); });
+  bar.addEventListener('input',function(){
+    if(au.duration){ au.currentTime=bar.value/100*au.duration; }
+    bar.style.setProperty('--p',bar.value+'%');
+  });
+
+  // password lock: the music starts when the right password is entered
+  function hash(str){
+    var h1=0xdeadbeef,h2=0x41c6ce57;
+    for(var i=0;i<str.length;i++){var ch=str.charCodeAt(i);
+      h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}
+    h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);
+    h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);
+    return 4294967296*(2097151&h2)+(h1>>>0);
+  }
+  function norm(t){ return t.normalize('NFC').replace(/[\u064B-\u065F\u0670\u0640\u200B-\u200F]/g,'').replace(/\s+/g,' ').trim(); }
+  var lock=$('lock'), lf=$('lf'), pw=$('pw'), err=$('err'), ask=$('ask'), wrong=0;
+  ask.href='https://wa.me/201061496331?text='+encodeURIComponent('كلمة السر هي بحبك يا حمودي');
+  pw.focus();
+  lf.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(hash(norm(pw.value))===8488063631442633){
+      lock.classList.add('out');
+      setTimeout(function(){ lock.style.display='none'; },700);
+      au.play().catch(function(){});
+    } else {
+      wrong++;
+      err.textContent='كلمة السر غلط\n'+(wrong===1?'تلميح: حاجة نفسي أسمعك بتقولها':'فكري طيب');
+      if(wrong>=3) ask.hidden=false;
+      lf.classList.remove('shake'); void lf.offsetWidth; lf.classList.add('shake');
+      pw.select();
+    }
+  });
+
+  // envelope: opens only while the music is playing
+  var env=$('env'), hint=$('hint'), hintText=hint.textContent;
+  au.addEventListener('play',function(){ if(!env.classList.contains('open')) hint.textContent=hintText; });
+  env.addEventListener('click',function(){
+    if(!env.classList.contains('open') && au.paused){
+      hint.textContent='شغّل الموسيقى الأول عشان تفتح الظرف';
+      hint.classList.remove('gone');
+      return;
+    }
+    var open=env.classList.toggle('open');
+    env.setAttribute('aria-expanded',open);
+    env.setAttribute('aria-label',open?'أغلق الظرف':'افتح الظرف');
+    hint.textContent=hintText;
+    hint.classList.toggle('gone',open);
+  });
+})();
+</script>
+</body>
+</html>
